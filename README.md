@@ -30,6 +30,10 @@ Start-Process '.\groupIV_capstone_project\index.htm'
 ## Notes & Next Steps
 - Replace placeholder values (stats, member photos, detailed model results) as you obtain validated results.
 - Add the training and model code in a new `model/` or `notebooks/` directory when ready.
+ - Add a site background image (e.g., your wrinkled pink paper) to `assets/pink-paper.jpg`.
+	 - Recommended: JPEG or WebP, ~1920×1200 for full-screen, optimized for web (compress to < 300KB if possible).
+	 - If `assets/pink-paper.jpg` is missing the site will automatically fall back to the soft pink gradients.
+ - (Optional) Add `assets/desc-bg.jpg` to apply a background image specifically to the Project Description card. The card uses a 30% translucent white overlay by default; tweak `--desc-overlay-opacity` in `style.css` to change the opacity.
 
 ## License
 Add a license file if you plan to open-source this project.
