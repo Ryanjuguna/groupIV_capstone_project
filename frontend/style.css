@@ -102,8 +102,24 @@ body::after{
 .project-tag{font-weight:600;opacity:0.95;margin-top:0.35rem}
 
 /* decorative ribbon */
-.hero .ribbon{position:absolute;right:1.25rem;top:1.25rem;width:96px;opacity:0.95;transform-origin:center;animation:float 4s ease-in-out infinite}
-.hero .ribbon svg{width:100%;height:auto;display:block}
+.hero .ribbon {
+	position:absolute;
+	right:1.25rem;
+	top:1.25rem;
+	width: 150px;
+    height: 150px;
+	color: var(--ribbon);
+	opacity:0.95;
+	transform-origin:center;
+	animation:float 4s ease-in-out infinite;
+	overflow: hidden;
+}
+.hero .ribbon svg {
+	width:100%;
+	height:auto;
+	display:block;
+	background: transparent !important;
+}
 
 @keyframes float{0%{transform:translateY(-6px)}50%{transform:translateY(6px)}100%{transform:translateY(-6px)}}
 
