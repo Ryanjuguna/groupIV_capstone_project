@@ -232,13 +232,32 @@ h2{margin-top:0}
 
 /* General Container for the Tool Diagnostic.html */
 .panel {
-    max-width: 850px;
+    /* pink themed card (image + overlay) similar to .card.description */
+    position:relative;
+    overflow:hidden;
+    max-width: var(--maxw);
     margin: 50px auto;
-    padding: 0px;
-    background-color: #ffffff;
-    /*box-shadow: 0 4px 15px rgba(0,0,0,0.1);	*/
+    padding: 1.25rem;
+    background-image:var(--description-bg);
+    background-size:cover;
+    background-position:center;
+    color:#fff; /* ensure readable text */
     border-radius: 12px;
+    box-shadow:0 10px 30px rgba(216,30,91,0.12);
 }
+
+.panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(171, 2, 112, 0.65); /* pink overlay */
+    z-index:0;
+    pointer-events:none;
+    border-radius:inherit;
+}
+
+/* ensure internal content sits above overlay */
+.panel > *{position:relative;z-index:1}
 
 /* Medical Form Layout */
 .medical-form {
