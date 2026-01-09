@@ -124,10 +124,14 @@ h2{margin-top:0}
 .card.description{
 	position:relative;
 	overflow:hidden;
+	/* remove default white card background and shadow so the image reaches the edges */
+	background-color:transparent;
 	background-image:var(--description-bg);
 	background-size:cover;
 	background-position:center;
-	/*color:#fff;*/
+	color:#fff;
+	box-shadow:none;
+	border: none;
 }
 .card.description::before{
 	content:"";
