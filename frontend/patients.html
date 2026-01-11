@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Patient Data — Breast Cancer Prediction</title>
+		<link rel="stylesheet" href="style.css" />
+        <style>
+            /* Additional styles for the table */
+            .table-container {
+                overflow-x: auto;
+                margin-top: 2rem;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background: white;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            }
+            th, td {
+                padding: 1rem;
+                text-align: left;
+                border-bottom: 1px solid #eee;
+            }
+            th {
+                background-color: #f8f9fa;
+                font-weight: 600;
+                color: #333;
+            }
+            tr:last-child td {
+                border-bottom: none;
+            }
+            .badge-mal {
+                background-color: #ffebee;
+                color: #c62828;
+                padding: 0.25rem 0.5rem;
+                border-radius: 4px;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+            .badge-ben {
+                background-color: #e8f5e9;
+                color: #2e7d32;
+                padding: 0.25rem 0.5rem;
+                border-radius: 4px;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+            .nav-link {
+                display: inline-block;
+                margin-bottom: 1rem;
+                color: #666;
+                text-decoration: none;
+            }
+            .nav-link:hover {
+                color: #333;
+                text-decoration: underline;
+            }
+        </style>
+	</head>
+	<body>
+		<header class="hero" style="min-height: 200px; padding-bottom: 2rem;">
+			<div class="container">
+				<h1>Patient Data</h1>
+				<p class="subtitle">View predicted patient records and results.</p>
+			</div>
+		</header>
+
+		<main class="container">
+            <a href="index.html" class="nav-link">← Back to Home</a>
+            
+			<section class="card">
+				<h2>Patient Registry</h2>
+                <div id="loading">Loading patient data...</div>
+                <div id="error-msg" style="color: red; display: none;"></div>
+                
+				<div class="table-container">
+                    <table id="patients-table" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Date Added</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                                <th>Test Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data will be inserted here -->
+                        </tbody>
+                    </table>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="container">
+				<small>© Group IV.</small>
+			</div>
+		</footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const table = document.getElementById('patients-table');
+                const tbody = table.querySelector('tbody');
+                const loading = document.getElementById('loading');
+                const errorMsg = document.getElementById('error-msg');
+
+                // Update this URL if your backend is running on a different port
+                const API_URL = 'http://127.0.0.1:8000/core/patients/';
+
+                fetch(API_URL)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        loading.style.display = 'none';
+                        if (data.status === 'success') {
+                            table.style.display = 'table';
+                            data.data.forEach(patient => {
+                                const row = document.createElement('tr');
+                                
+                                let predictionBadge = '<span style="color: #999;">N/A</span>';
+                                if (patient.prediction === 'Malignant') {
+                                    predictionBadge = '<span class="badge-mal">Malignant</span>';
+                                } else if (patient.prediction === 'Benign') {
+                                    predictionBadge = '<span class="badge-ben">Benign</span>';
+                                }
+
+                                row.innerHTML = `
+                                    <td>${patient.full_name}</td>
+                                    <td>${patient.email}</td>
+                                    <td>${patient.created_at}</td>
+                                    <td>${predictionBadge}</td>
+                                    <td>${patient.confidence}</td>
+                                    <td>${patient.date_tested}</td>
+                                `;
+                                tbody.appendChild(row);
+                            });
+                        } else {
+                            errorMsg.textContent = 'Error loading data: ' + (data.message || 'Unknown error');
+                            errorMsg.style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        loading.style.display = 'none';
+                        errorMsg.textContent = 'Failed to fetch data. Ensure backend is running. Error: ' + error.message;
+                        errorMsg.style.display = 'block';
+                        console.error('Error:', error);
+                    });
+            });
+        </script>
+	</body>
+</html>
