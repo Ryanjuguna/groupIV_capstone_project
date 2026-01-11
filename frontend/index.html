@@ -203,6 +203,14 @@
 			<small>© Group IV.</small>
 		</div>
 	</footer>
+	<script>
+		window.addEventListener('load', () => {
+			console.log("Nudging the backend to wake up...");
+			fetch('https://lindai.onrender.com/api/patients/')
+				.then(() => console.log("Backend is awake!"))
+				.catch(() => console.log("Backend is starting up..."));
+		});
+	</script>
 </body>
 
 </html>
