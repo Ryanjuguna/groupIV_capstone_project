@@ -3,8 +3,13 @@
 Short capstone project to build a lightweight, interpretable machine learning model to help prioritize breast cancer diagnostics.
 
 ## Project Overview
-- Purpose: Provide a clinician-friendly risk prediction tool using routine clinical features.
-- Key ideas: interpretability, low computational cost, clear performance tracking and a simple web demo.
+- **Purpose**: Provide a clinician-friendly risk prediction tool using routine clinical features.
+- **Key ideas**: interpretability, low computational cost, clear performance tracking and a simple web demo.
+
+### 📚 Documentation
+> [!NOTE]
+> All project documentation (Proposal, Design, Testing, Presentation) is consolidated in:
+> *   **[Comprehensive Project Report](docs/PROJECT_REPORT.md)**
 
 ## Team
 - Vincent Nyakach — Project Lead
@@ -16,8 +21,9 @@ Short capstone project to build a lightweight, interpretable machine learning mo
 (Replace with final member names/roles if needed.)
 
 ## What’s in this repo
-- `index.htm` — Project landing page and demo UI
+- `index.html` — Project landing page and demo UI
 - `style.css` — Styles for the UI
+- `docs/` — Project documentation
 
 ## Run locally
 - Recommended: install VS Code Live Server extension and click **Go Live** for `index.htm`.
